@@ -15,6 +15,8 @@ all_num_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 anl_clone = all_num_list
 unwanted = []
 
+next_column = ''
+
 
 # Puts your input in columns
 for column in range(column_num):
@@ -48,15 +50,33 @@ for box_columns in range(9):
         multi = 6
 
 
-for search_for_num in range(len(all_num_list)):
-    if anl_clone[search_for_num] in column_full[0]:
-        unwanted.append(anl_clone[search_for_num])
+for replace in range(len(column_full)):
+    unwanted.clear()
+    anl_clone = all_num_list.copy()
 
-for destroy in range(len(unwanted)):
-    anl_clone.remove(unwanted[destroy])
+    # Searches for unwanted numbers in columns
+    for search_for_num in anl_clone:
+        if search_for_num in column_full[replace]:
+            unwanted.append(search_for_num)
 
-print(anl_clone)
+    # Removes unwanted numbers
+    for destroy in range(len(unwanted)):
+        anl_clone.remove(unwanted[destroy])
 
+    # Fills in the missing numbers
+    for change in range(len(anl_clone)):
+        column_full[replace][column_full[replace].index('X')] = anl_clone[change]
+
+    print(column_full)
+
+'''
+for write_column in column_full:
+    for write_num in write_column:
+        print(write_num, end=' ' + next_column)
+        next_column = ''
+    next_column = '\n'
+    
+'''
 
 # ˇˇA sudoku example ˇˇ
 """
